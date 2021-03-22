@@ -1,6 +1,11 @@
 port: 8888
 mirakurunPath: http://mirakurun:40772/
 
+https:
+  port: 64368
+  key: '%NODE% %ROOT%/config/key'
+  cert: '%NODE% %ROOT%/config/cert'
+
 # dbtype: sqlite
 # sqlite:
 #   extensions:
