@@ -1,3 +1,5 @@
+個人サーバー用に設定内容を変更したリポジトリ。v2ブランチからnijikaブランチを切っている。
+
 # docker-mirakurun-epgstation
 
 [Mirakurun](https://github.com/Chinachu/Mirakurun) + [EPGStation](https://github.com/l3tnun/EPGStation) の Docker コンテナ
