@@ -24,7 +24,7 @@ services:
                 max-size: 10m
 
     mysql:
-        image: mariadb:10.4
+        image: jsurf/rpi-mariadb
         volumes:
             - mysql-db:/var/lib/mysql
         environment:
