@@ -1,17 +1,18 @@
 FROM chinachu/mirakurun
 
-RUN apt update && \
-    apt upgrade -y && \
-    apt install -y curl top less && \
+ENV DEV="make cmake gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev procps less autoconf automake"
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get -y install $DEV && \
 \
 # recdvb
 \
-    apt install -y cmake  build-essential && \
     git clone https://github.com/stz2012/libarib25 && \
     cd libarib25 && \
     cmake . && \
     make && \
-    sudo make install && \
+    make install && \
 \
 # recdvb
 \
