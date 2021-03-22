@@ -49,8 +49,6 @@ services:
             - ./epgstation/thumbnail:/app/thumbnail
             - ./epgstation/logs:/app/logs
             - /media/pi/HD-NRLD-A2/Videos:/app/recorded
-            - /etc/letsencrypt/live/protv.mydns.jp/privkey.pem:/app/config/key
-            - /etc/letsencrypt/live/protv.mydns.jp/fullchain.pem:/app/config/cert
         environment:
             TZ: "Asia/Tokyo"
         depends_on:

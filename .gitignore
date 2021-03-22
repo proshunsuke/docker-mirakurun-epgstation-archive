@@ -9,6 +9,4 @@
 /epgstation/data/streamfiles/*.ts
 /epgstation/data/streamfiles/*.m3u8
 /epgstation/data/*.json
-/epgstation/config/key
-/epgstation/config/cert
 !.gitkeep
