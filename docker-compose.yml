@@ -1,7 +1,8 @@
 version: '3.7'
 services:
     mirakurun:
-        image: chinachu/mirakurun
+        build: mirakurun
+        container_name: mirakurun
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
@@ -25,6 +26,7 @@ services:
 
     mysql:
         image: jsurf/rpi-mariadb
+        container_name: mysql
         volumes:
             - mysql-db:/var/lib/mysql
         environment:
@@ -42,6 +44,7 @@ services:
 
     epgstation:
         build: epgstation
+        container_name: epgstation
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./epgstation/config:/app/config
