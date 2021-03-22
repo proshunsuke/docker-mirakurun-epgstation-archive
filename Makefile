@@ -2,10 +2,10 @@ UID := $(shell id -u)
 GID := $(shell id -g)
 
 setup/mirakurun:
-	docker-compose run --rm -e SETUP=true -e UID=${UID} -e GID=${GID} mirakurun
+	env UID=${UID} GID=${GID} docker-compose run --rm -e SETUP=true mirakurun
 
 start:
-	docker-compose up -e UID=${UID} -e GID=${GID} -d
+	env UID=${UID} GID=${GID} docker-compose up -d
 
 down:
 	docker-compose down
@@ -18,10 +18,10 @@ update/mirakurun:
 	$(MAKE) start
 
 update/epgstation:
-	docker-compose build -e UID=${UID} -e GID=${GID} --pull
+	env UID=${UID} GID=${GID} docker-compose build --pull
 	$(MAKE) start
 
 update:
 	docker-compose pull
-	docker-compose build -e UID=${UID} -e GID=${GID} --pull
+	env UID=${UID} GID=${GID} docker-compose build --pull
 	$(MAKE) start
