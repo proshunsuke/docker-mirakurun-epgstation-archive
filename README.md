@@ -13,40 +13,55 @@
 ## インストール手順
 
 ```sh
-$ git clone git@github.com:proshunsuke/docker-mirakurun-epgstation.git
-$ cd docker-mirakurun-epgstation
-$ docker-compose run --rm -e SETUP=true mirakurun
+git clone git@github.com:proshunsuke/docker-mirakurun-epgstation.git
+cd docker-mirakurun-epgstation
+make setup/mirakurun
 
 #チャンネル設定
-$ vim mirakurun/conf/channels.yml
+vim mirakurun/conf/channels.yml
 
 #コメントアウトされている restart や user の設定を適宜変更する
-$ vim docker-compose.yml
+vim docker-compose.yml
 ```
 
 ## 起動
 
 ```sh
-$ sudo docker-compose up -d
+make start
 ```
 
 mirakurun の EPG 更新を待ってからブラウザで http://DockerHostIP:8888 へアクセスし動作を確認する
 
+## 更新
+
+### すべてを更新
+
+```shell
+make update
+```
+
+### mirakurunとdbを更新
+
+```shell
+make update/mirakurun
+```
+
+### epgstationを更新
+
+```shell
+make update/epgstation
+```
+
 ## 停止
 
 ```sh
-$ sudo docker-compose down
+make down
 ```
 
-## 更新
+## 削除
 
-```sh
-# mirakurunとdbを更新
-$ sudo docker-compose pull
-# epgstationを更新
-$ sudo docker-compose build --pull
-# 最新のイメージを元に起動
-$ sudo docker-compose up -d
+```shell
+make down/all
 ```
 
 ## 設定
