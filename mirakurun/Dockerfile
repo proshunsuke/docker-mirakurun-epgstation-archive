@@ -33,4 +33,4 @@ RUN apt update && \
     ./autogen.sh && \
     ./configure --enable-b25 && \
     make && \
-    make install && \
+    make install
