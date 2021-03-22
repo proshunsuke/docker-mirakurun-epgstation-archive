@@ -11,7 +11,7 @@
 ## インストール手順
 
 ```sh
-$ git clone https://github.com/l3tnun/docker-mirakurun-epgstation.git
+$ git clone git@github.com:proshunsuke/docker-mirakurun-epgstation.git
 $ cd docker-mirakurun-epgstation
 $ docker-compose run --rm -e SETUP=true mirakurun
 
