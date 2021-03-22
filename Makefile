@@ -1,3 +1,6 @@
+UID := $(shell id -u)
+GID := $(shell id -g)
+
 setup/mirakurun:
 	docker-compose run --rm -e SETUP=true -e UID=${UID} -e GID=${GID} mirakurun
 
