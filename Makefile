@@ -1,27 +1,32 @@
 UID := $(shell id -u)
 GID := $(shell id -g)
 
+COMPOSE=env UID=${UID} GID=${GID} docker-compose
+
 setup/mirakurun:
-	env UID=${UID} GID=${GID} docker-compose run --rm -e SETUP=true mirakurun
+	$(COMPOSE) run --rm -e SETUP=true mirakurun
 
 start:
-	env UID=${UID} GID=${GID} docker-compose up -d
+	$(COMPOSE) up -d
+
+stop:
+	$(COMPOSE) stop
 
 down:
-	docker-compose down
+	$(COMPOSE) down
 
 down/all:
-	docker-compose down --rmi all --volumes --remove-orphans
+	$(COMPOSE) down --rmi all --volumes --remove-orphans
 
 update/mirakurun:
-	docker-compose pull
+	$(COMPOSE) pull
 	$(MAKE) start
 
 update/epgstation:
-	env UID=${UID} GID=${GID} docker-compose build --pull
+	$(COMPOSE) build --pull
 	$(MAKE) start
 
 update:
-	docker-compose pull
-	env UID=${UID} GID=${GID} docker-compose build --pull
+	$(COMPOSE) pull
+	$(COMPOSE) build --pull
 	$(MAKE) start

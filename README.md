@@ -55,10 +55,16 @@ make update/epgstation
 ## 停止
 
 ```sh
+make stop
+```
+
+## コンテナの削除
+
+```shell
 make down
 ```
 
-## 削除
+## イメージ含め全削除
 
 ```shell
 make down/all
