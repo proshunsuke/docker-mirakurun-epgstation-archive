@@ -51,7 +51,7 @@ services:
             - ./epgstation/data:/app/data
             - ./epgstation/thumbnail:/app/thumbnail
             - ./epgstation/logs:/app/logs
-            - /media/pi/HD-NRLD-A2/Videos:/app/recorded
+            - /mnt/HD-NRLD-A/Videos:/app/recorded
         environment:
             TZ: "Asia/Tokyo"
         depends_on:
