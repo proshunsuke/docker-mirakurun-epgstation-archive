@@ -18,6 +18,7 @@ RUN apt-get update && \
 # recdvb
 \
     wget -P /tmp/ http://www13.plala.or.jp/sat/recdvb/recdvb-1.3.3.tgz && \
+    cd /tmp && \
     tar xvzf recdvb-1.3.3.tgz && \
     cd recdvb-1.3.3 && \
     ./autogen.sh && \
