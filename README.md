@@ -1,27 +1,61 @@
-個人サーバー用に設定内容を変更したリポジトリ。v2ブランチからnijikaブランチを切っている。
+個人サーバー用に設定内容を変更したリポジトリ。本家v2ブランチからnijikaブランチを切っている。
 
 # docker-mirakurun-epgstation
 
 [Mirakurun](https://github.com/Chinachu/Mirakurun) + [EPGStation](https://github.com/l3tnun/EPGStation) の Docker コンテナ
 
-## 前提条件
+<img src="https://user-images.githubusercontent.com/3148511/112107472-50dded00-8bf2-11eb-972b-f5b149e51716.png" width="1000">
 
-- Docker, docker-compose の導入が必須
-- ホスト上の pcscd は停止する
-- チューナーのドライバが適切にインストールされていること
+## 環境
+
+### サーバー
+
+* Raspberry Pi: Raspberry Pi 4 Model B Rev 1.1
+* OS: Raspbian GNU/Linux 10 (buster)
+* Linux Kernel: Linux 5.10.17-v7l+ armv7l GNU/Linux
+
+### チューナー
+
+* PX-S1UD V2.0
+* DTV02-1T1S-U
+
+### カードリーダー
+
+* SCR3310/v2.0
+
+### リバースプロキシのためのwebサーバー
+
+* nginx
+
+## 事前準備
+
+### dockerのインストール
+
+```shell
+curl -sSL https://get.docker.com | sh
+```
+
+### docker-composeのインストール
+
+aptのリポジトリでは古いバージョンがインストールされてしまうのでpipを使用する
+
+```shell
+pip3 install -U docker-compose
+echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
+```
+
+### ドライバのインストール
+
+以下の通りに行う
+
+* https://github.com/nns779/px4_drv
 
 ## インストール手順
 
 ```sh
-git clone git@github.com:proshunsuke/docker-mirakurun-epgstation.git
+git clone https://github.com/proshunsuke/docker-mirakurun-epgstation.git
 cd docker-mirakurun-epgstation
 make setup/mirakurun
-
-#チャンネル設定
-vim mirakurun/conf/channels.yml
-
-#コメントアウトされている restart や user の設定を適宜変更する
-vim docker-compose.yml
 ```
 
 ## 起動
@@ -29,8 +63,6 @@ vim docker-compose.yml
 ```sh
 make start
 ```
-
-mirakurun の EPG 更新を待ってからブラウザで http://DockerHostIP:8888 へアクセスし動作を確認する
 
 ## 更新
 
