@@ -6,22 +6,25 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get -y install $DEV && \
 \
-# recdvb
+# libarib25
 \
-    git clone https://github.com/stz2012/libarib25 && \
-    cd libarib25 && \
+    git clone https://github.com/stz2012/libarib25 /tmp/libarib25 && \
+    cd /tmp/libarib25 && \
     cmake . && \
     make && \
     make install && \
+    rm -rf /tmp/libarib25 && \
 \
 # recdvb
 \
-    git clone https://github.com/epgdatacapbon/recdvb /tmp/recdvb && \
-    cd /tmp/recdvb && \
+    wget -P /tmp/ http://www13.plala.or.jp/sat/recdvb/recdvb-1.3.3.tgz && \
+    tar xvzf recdvb-1.3.3.tgz && \
+    cd recdvb-1.3.3 && \
     ./autogen.sh && \
     ./configure --enable-b25 && \
     make && \
     make install && \
+    rm -rf /tmp/recdvb-1.3.3* && \
 \
 # recpt1
 \
@@ -34,4 +37,5 @@ RUN apt-get update && \
     ./autogen.sh && \
     ./configure --enable-b25 && \
     make && \
-    make install
+    make install && \
+    rm -rf /tmp/recpt1
