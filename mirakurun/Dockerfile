@@ -8,6 +8,7 @@ RUN apt-get update && \
 \
 # libarib25
 \
+    cd && \
     git clone https://github.com/stz2012/libarib25 /tmp/libarib25 && \
     cd /tmp/libarib25 && \
     cmake . && \
@@ -17,6 +18,7 @@ RUN apt-get update && \
 \
 # recdvb
 \
+    cd && \
     wget -P /tmp/ http://www13.plala.or.jp/sat/recdvb/recdvb-1.3.3.tgz && \
     cd /tmp && \
     tar xvzf recdvb-1.3.3.tgz && \
@@ -29,6 +31,7 @@ RUN apt-get update && \
 \
 # recpt1
 \
+    cd && \
     git clone https://github.com/stz2012/recpt1 /tmp/recpt1 && \
     cd /tmp/recpt1/recpt1 && \
     sed -i -e 's/arib25/aribb25/g' configure.ac && \
