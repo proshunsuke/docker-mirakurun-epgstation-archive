@@ -1,6 +1,6 @@
 FROM l3tnun/epgstation:master-debian
 
-ENV DEV="make cmake gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev procps less autoconf automake"
+ENV DEV="make cmake gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev procps less autoconf automake locales"
 ENV FFMPEG_VERSION=4.2.4
 
 RUN apt-get update && \
@@ -32,6 +32,9 @@ RUN apt-get update && \
       --enable-libx264 \
       --enable-libx265 \
       --enable-nonfree \
+      --enable-mmal \
+      --enable-omx-rpi \
+      --enable-omx \
       --disable-debug \
       --disable-doc \
     && \
@@ -45,4 +48,9 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/ffmpeg_sources
+    rm -rf /tmp/ffmpeg_sources && \
+\
+# 日本語入力
+\
+    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && locale-gen
+ENV LANG ja_JP.UTF-8
