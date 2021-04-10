@@ -7,9 +7,7 @@ const analyzedurationSize = '10M'; // Mirakurun の設定に応じて変更す�
 const probesizeSize = '32M'; // Mirakurun の設定に応じて変更すること
 const maxMuxingQueueSize = 1024;
 const dualMonoMode = 'main';
-const videoHeight = parseInt(process.env.VIDEORESOLUTION, 10);
 const isDualMono = parseInt(process.env.AUDIOCOMPONENTTYPE, 10) == 2;
-const audioBitrate = videoHeight > 720 ? '192k' : '128k';
 const preset = 'veryfast';
 const codec = 'libx264';
 const crf = 23;
@@ -32,21 +30,17 @@ Array.prototype.push.apply(args,['-movflags', 'faststart']);
 
 // video filter 設定
 let videoFilter = 'yadif';
-if (videoHeight > 720) {
-    videoFilter += ',scale=-2:720'
-}
+
 Array.prototype.push.apply(args, ['-vf', videoFilter]);
 
 // その他設定
 Array.prototype.push.apply(args,[
     '-preset', preset,
-    '-aspect', '16:9',
     '-c:v', codec,
     '-crf', crf,
     '-f', 'mp4',
-    '-c:a', 'aac',
+    '-c:a', 'copy',
     '-ar', '48000',
-    '-ab', audioBitrate,
     '-ac', '2',
     output
 ]);
