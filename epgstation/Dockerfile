@@ -120,7 +120,7 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
       --enable-libx264 \
       --enable-shared \
       --enable-libfdk-aac \
-      --enable-nonfree
+      --enable-nonfree \
     && \
     cd /tmp/ffmpeg_sources/ffmpeg* && \
     make -j$(nproc) && \
