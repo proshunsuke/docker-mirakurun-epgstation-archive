@@ -132,6 +132,9 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/aac && \
+    rm -rf /tmp/avisynth-headers && \
+    rm -f /tmp/userland && \
     rm -rf /tmp/ffmpeg_sources && \
 \
 # 日本語入力
