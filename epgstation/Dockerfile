@@ -134,10 +134,12 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/aac && \
     rm -rf /tmp/avisynth-headers && \
-    rm -f /tmp/userland && \
+    rm -rf /tmp/userland && \
     rm -rf /tmp/ffmpeg_sources && \
 \
 # 日本語入力
 \
-    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && locale-gen
+    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && \
+    locale-gen && \
+    echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
 ENV LANG ja_JP.UTF-8
