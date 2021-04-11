@@ -13,11 +13,9 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     apt-get -y install $DEV && \
     apt-get -y install yasm libx264-dev libmp3lame-dev libopus-dev libvpx-dev && \
     apt-get -y install libx265-dev libnuma-dev && \
-    apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0 && \
-\
+    apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0
 # fdk-aac
-\
-    mkdir -p /tmp/aac && \
+RUN mkdir -p /tmp/aac && \
     cd /tmp/aac && \
     git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git && \
     cd fdk-aac && \
@@ -25,10 +23,10 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     ./configure && \
     make -j$(nproc) && \
     make install && \
-\
+    rm -rf /tmp/aac
+
 # avisynth-headers
-\
-    mkdir /tmp/avisynth-headers && \
+RUN mkdir /tmp/avisynth-headers && \
     cd /tmp/avisynth-headers && \
     git clone --depth 1 git://github.com/AviSynth/AviSynthPlus.git && \
     cd AviSynthPlus && \
@@ -36,10 +34,10 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     cd avisynth-build && \
     cmake ../ -DHEADERS_ONLY:bool=on && \
     make install && \
-\
+    rm -rf /tmp/avisynth-headers
+
 # raspberrypi userland
-\
-    mkdir /tmp/userland && \
+RUN mkdir /tmp/userland && \
     cd /tmp/userland && \
     git clone --depth 1 git://github.com/raspberrypi/userland.git && \
     cd userland && \
@@ -47,10 +45,10 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     cd build && \
     cmake .. && \
     make install && \
-\
+    rm -rf /tmp/userland
+
 #ffmpeg build
-\
-    mkdir /tmp/ffmpeg_sources && \
+RUN mkdir /tmp/ffmpeg_sources && \
     cd /tmp/ffmpeg_sources && \
     wget http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 -O ffmpeg.tar.bz2 && \
     tar xjvf ffmpeg.tar.bz2 && \
@@ -125,21 +123,17 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     cd /tmp/ffmpeg_sources/ffmpeg* && \
     make -j$(nproc) && \
     make install && \
-\
+    rm -rf /tmp/ffmpeg_sources
+
 # 不要なパッケージを削除
-\
-    apt-get -y remove $DEV && \
+RUN apt-get -y remove $DEV && \
     apt-get autoremove -y && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/aac && \
-    rm -rf /tmp/avisynth-headers && \
-    rm -rf /tmp/userland && \
-    rm -rf /tmp/ffmpeg_sources && \
-\
+    rm -rf /var/lib/apt/lists/*
+
 # 日本語入力
-\
-    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && \
+RUN sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && \
     locale-gen && \
     echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
+
 ENV LANG ja_JP.UTF-8
