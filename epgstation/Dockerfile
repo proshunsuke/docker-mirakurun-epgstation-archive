@@ -9,7 +9,7 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     echo "/opt/vc/lib" >> /etc/ld.so.conf && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt apt -y build-dep ffmpeg && \
+    apt -y build-dep ffmpeg && \
     apt-get -y install $DEV && \
     apt-get -y install yasm libx264-dev libmp3lame-dev libopus-dev libvpx-dev && \
     apt-get -y install libx265-dev libnuma-dev && \
