@@ -41,5 +41,7 @@ RUN apt-get update && \
 \
 # 日本語入力
 \
-    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && locale-gen
+    sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen && \
+    locale-gen && \
+    echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
 ENV LANG ja_JP.UTF-8
