@@ -9,11 +9,11 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.
     echo "/opt/vc/lib" >> /etc/ld.so.conf && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt -y build-dep ffmpeg && \
     apt-get -y install $DEV && \
+    apt -y build-dep ffmpeg && \
     apt-get -y install yasm libx264-dev libmp3lame-dev libopus-dev libvpx-dev && \
     apt-get -y install libx265-dev libnuma-dev && \
-    apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0
+    apt-get -y install libasound2 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0 libjack0 libsdl2-2.0-0 libxv-dev libopenmpt-dev libbluray-dev libssh-gcrypt-4
 # fdk-aac
 RUN mkdir -p /tmp/aac && \
     cd /tmp/aac && \
