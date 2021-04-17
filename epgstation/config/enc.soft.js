@@ -1,4 +1,4 @@
-// ハードウェアエンコード設定
+// ソフトウェアエンコード設定
 const spawn = require('child_process').spawn;
 const ffmpeg = process.env.FFMPEG;
 
@@ -6,10 +6,12 @@ const input = process.env.INPUT;
 const output = process.env.OUTPUT;
 const analyzedurationSize = '10M'; // Mirakurun の設定に応じて変更すること
 const probesizeSize = '32M'; // Mirakurun の設定に応じて変更すること
+const maxMuxingQueueSize = 1024;
 const dualMonoMode = 'main';
 const isDualMono = parseInt(process.env.AUDIOCOMPONENTTYPE, 10) == 2;
-const codec = 'h264_omx';
-const videoBitrate = '10M';
+const preset = 'veryfast';
+const codec = 'libx264';
+const crf = 23;
 
 const args = ['-y', '-analyzeduration', analyzedurationSize, '-probesize', probesizeSize];
 
@@ -24,6 +26,9 @@ Array.prototype.push.apply(args,['-i', input]);
 // メタ情報を先頭に置く
 Array.prototype.push.apply(args,['-movflags', 'faststart']);
 
+// 字幕データを含めたストリームをすべてマップ
+// Array.prototype.push.apply(args, ['-map', '0', '-ignore_unknown', '-max_muxing_queue_size', maxMuxingQueueSize, '-sn']);
+
 // video filter 設定
 let videoFilter = 'yadif';
 
@@ -31,9 +36,13 @@ Array.prototype.push.apply(args, ['-vf', videoFilter]);
 
 // その他設定
 Array.prototype.push.apply(args,[
+    '-preset', preset,
     '-c:v', codec,
-    '-b:v', videoBitrate,
+    '-crf', crf,
     '-f', 'mp4',
+    '-c:a', 'copy',
+    '-ar', '48000',
+    '-ac', '2',
     output
 ]);
 
